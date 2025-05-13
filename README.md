@@ -1,1 +1,1 @@
-# cli-battleship
+# Battleship
