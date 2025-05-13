@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "UCRT64",
+            "includePath": [
+                "C:/msys64/ucrt64/include/**",
+                "C:/vcpkg/installed/x64-windows/include"
+            ],
+            "defines": [],
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
