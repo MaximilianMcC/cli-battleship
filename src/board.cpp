@@ -1,4 +1,6 @@
 #include "board.hpp"
+#include "consoleUtils.hpp"
+#include <string>
 
 Boat* Board::BoatAtPosition(Vector2 position)
 {
@@ -20,4 +22,53 @@ bool Board::attackSpot(Vector2 position)
 	// Check for if we hit a boat
 	Boat* hitBoat = BoatAtPosition(position);
 	if (hitBoat == nullptr) return false;
+}
+
+// TODO: Return the size of the board (just return position (we are updating it))
+void Board::DrawGrid(Vector2 position)
+{
+	// Draw the top section
+	ConsoleUtils::GotoXY(position.X, position.Y++);
+	std::cout << generateBoardRow("╔", "═══", "╦", "╗", width) << "\n";
+
+	// Draw the middle sections
+	std::string middleRowTop = generateBoardRow("║", "   ", "║", "║", width);
+	std::string middleRowBottom = generateBoardRow("╠", "═══", "╬", "╣", width);
+	for (int i = 0; i < (height - 1); i++)
+	{
+		ConsoleUtils::GotoXY(position.X, position.Y++);
+		std::cout << middleRowTop << "\n";
+
+		ConsoleUtils::GotoXY(position.X, position.Y++);
+		std::cout << middleRowBottom << "\n";
+	}
+	ConsoleUtils::GotoXY(position.X, position.Y++);
+	std::cout << middleRowTop << "\n";
+
+	// Draw the bottom section
+	ConsoleUtils::GotoXY(position.X, position.Y++);
+	std::cout << generateBoardRow("╚", "═══", "╩", "╝", width) << "\n";
+}
+
+std::string Board::generateBoardRow(std::string leftSide, std::string middle, std::string separator, std::string rightSide, int rows)
+{
+	// TODO: Use char arrays because its quicker
+	std::string row;
+
+	// Add the left side
+	row += leftSide;
+
+	// Add the middle sections
+	for (int i = 0; i < (rows - 1); i++)
+	{
+		row += middle;
+		row += separator;
+	}
+	row += middle;
+
+	// Add the right side
+	row += rightSide;
+	
+	// Return the generated row
+	return row;
 }

@@ -1,4 +1,6 @@
 #include "boat.hpp"
+#include <vector>
+#include <string>
 
 #pragma once
 
@@ -10,11 +12,13 @@ private:
 	static const short height = 10;
 	static const short maxBoats = 5;
 
-	// The stuff on the actual board
-	short misses[height][width];
-	Boat* boats[maxBoats];
+	// The actual board
+	std::vector<Vector2> misses = {};
+	std::vector<Boat*> boats = {};
 
 	Boat* BoatAtPosition(Vector2 position);
+
+	std::string generateBoardRow(std::string leftSide, std::string middle, std::string separator, std::string rightSide, int rows);
 
 public:
 	// Board() {}
@@ -25,4 +29,7 @@ public:
 
 	// Returns true/false depending on hit or miss
 	bool attackSpot(Vector2 position);
+
+	// Draw the board nicely
+	void DrawGrid(Vector2 position);
 };
