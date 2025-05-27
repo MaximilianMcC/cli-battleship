@@ -18,6 +18,7 @@ int main()
 	
 		// Clear anything (for if we're launching via cli)
 		ConsoleUtils::ClearScreen();
+		ConsoleUtils::hideCursor();
 	}
 
 	// Make a board for the player and for the AI
@@ -26,10 +27,18 @@ int main()
 
 	Vector2 playerBoardPosition = {40, 5};
 	playerBoard->DrawGrid(playerBoardPosition);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 0}, "A", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {1, 1}, "B", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {2, 2}, "B", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {5, 8}, "B", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {0, 0}, " A1", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {1, 0}, " A2", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {0, 1}, " B1", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {1, 1}, " B2", ConsoleUtils::Color::BrightBlack);
+
+	// Hit, miss, target
+	// TODO: Colorblind mode that makes the red magenta
+	playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Red);
+	playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Magenta);
+	playerBoard->DrawToGrid(playerBoardPosition, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
+	playerBoard->DrawToGrid(playerBoardPosition, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
+
 	
 
 	// Get rid of the boards when we're done

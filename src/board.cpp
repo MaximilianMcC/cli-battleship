@@ -25,16 +25,17 @@ bool Board::attackSpot(Vector2 position)
 }
 
 // TODO: Return the size of the board (just return position (we are updating it))
+// TODO: Make so you can change the width (4 rn)
 void Board::DrawGrid(Vector2 position)
 {
 	// Draw the top section
 	ConsoleUtils::GotoXY(position.X, position.Y++);
-	std::cout << generateBoardRow("╔", "═══", "╦", "╗", width) << "\n";
+	std::cout << generateBoardRow("╔", "════", "╤", "╗", width) << "\n";
 
 	// Draw the middle sections
 	// TF: Constant
-	const std::string middleRowTop = generateBoardRow("║", "   ", "║", "║", width);
-	const std::string middleRowBottom = generateBoardRow("╠", "═══", "╬", "╣", width);
+	const std::string middleRowTop = generateBoardRow("║", "    ", "│", "║", width);
+	const std::string middleRowBottom = generateBoardRow("╟", "────", "┼", "╢", width);
 	for (int i = 0; i < (height - 1); i++)
 	{
 		ConsoleUtils::GotoXY(position.X, position.Y++);
@@ -48,7 +49,7 @@ void Board::DrawGrid(Vector2 position)
 
 	// Draw the bottom section
 	ConsoleUtils::GotoXY(position.X, position.Y++);
-	std::cout << generateBoardRow("╚", "═══", "╩", "╝", width) << "\n";
+	std::cout << generateBoardRow("╚", "════", "╧", "╝", width) << "\n";
 }
 
 std::string Board::generateBoardRow(std::string leftSide, std::string middle, std::string separator, std::string rightSide, int rows)
@@ -80,7 +81,7 @@ void Board::DrawToGrid(Vector2 boardPosition, Vector2 cellCoordinate, std::strin
 	std::cout << color;
 	
 	// Turn both relative coordinates to screen coordinates
-	boardPosition += Vector2(2, 1) + (cellCoordinate * Vector2(4, 2));
+	boardPosition += Vector2(1) + (cellCoordinate * Vector2(5, 2));
 	ConsoleUtils::GotoXY(boardPosition);
 
 	// Draw the grid
