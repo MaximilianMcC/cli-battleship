@@ -26,7 +26,10 @@ int main()
 
 	Vector2 playerBoardPosition = {40, 5};
 	playerBoard->DrawGrid(playerBoardPosition);
-
+	playerBoard->DrawToGrid(playerBoardPosition, {0, 0}, "A", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {1, 1}, "B", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {2, 2}, "B", ConsoleUtils::Color::BrightBlack);
+	playerBoard->DrawToGrid(playerBoardPosition, {5, 8}, "B", ConsoleUtils::Color::BrightBlack);
 	
 
 	// Get rid of the boards when we're done

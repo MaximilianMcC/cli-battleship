@@ -1,6 +1,7 @@
 #include "boat.hpp"
 #include <vector>
 #include <string>
+#include "consoleUtils.hpp"
 
 #pragma once
 
@@ -31,5 +32,7 @@ public:
 	bool attackSpot(Vector2 position);
 
 	// Draw the board nicely
+	// TF: Default Parameter
 	void DrawGrid(Vector2 position);
+	void DrawToGrid(Vector2 boardPosition, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
 };

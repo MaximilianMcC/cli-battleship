@@ -1,6 +1,6 @@
 # Battleship
 
-| Technical Feature           | C++ Comment                      | Done |
+| Technical Feature           | Comment                          | Done |
 |-----------------------------|----------------------------------|------|
 | Variable types              | `// TF: Variable Type`           | ❌   |
 | The const keyword           | `// TF: Constant`                | ✅   |
@@ -10,7 +10,7 @@
 | Iteration structures        | `// TF: Iteration Structure`     | ❌   |
 | Conditional statements      | `// TF: Conditional Statement`   | ❌   |
 | Arrays                      | `// TF: Array`                   | ❌   |
-| Default parameters          | `// TF: Default Parameter`       | ❌   |
+| Default parameters          | `// TF: Default Parameter`       | ✅   |
 | Pseudo random numbers       | `// TF: Pseudo Random Number`    | ❌   |
 | Pointers: Initialised       | `// TF: Pointer Initialised`     | ❌   |
 | Pointers: Dereferenced      | `// TF: Pointer Dereferenced`    | ❌   |

@@ -12,6 +12,13 @@ public:
 	Vector2(short value) { X = value; Y = value; }
 
 	Vector2 operator+(const Vector2& other) const { return Vector2(X + other.X, Y + other.Y); }
+	Vector2& operator+=(const Vector2& other)
+	{
+		X += other.X;
+		Y += other.Y;
+		return *this;
+	}
+
 	Vector2 operator-(const Vector2& other) const { return Vector2(X - other.X, Y - other.Y); }
 	Vector2 operator*(const Vector2& other) const { return Vector2(X * other.X, Y * other.Y); }
 	Vector2 operator/(const Vector2& other) const { return Vector2(X / other.X, Y / other.Y); }
