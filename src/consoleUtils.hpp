@@ -23,11 +23,33 @@ public:
 	// Constants
 	struct Color
 	{
-		static constexpr const char* Reset = "\x1b[0m";
-		static constexpr const char* White = "\x1b[37m";
-		static constexpr const char* Red = "\x1b[31m";
-		static constexpr const char* BrightBlack = "\x1b[90m";
-		static constexpr const char* BlackBackground = "\x1b[40m";
+ 		static constexpr const char* Reset         = "\x1b[0m";
+		static constexpr const char* Black         = "\x1b[30m";
+		static constexpr const char* Red           = "\x1b[31m";
+		static constexpr const char* Green         = "\x1b[32m";
+		static constexpr const char* Yellow        = "\x1b[33m";
+		static constexpr const char* Blue          = "\x1b[34m";
+		static constexpr const char* Magenta       = "\x1b[35m";
+		static constexpr const char* Cyan          = "\x1b[36m";
+		static constexpr const char* White         = "\x1b[37m";
+
+		static constexpr const char* BrightBlack   = "\x1b[90m";
+		static constexpr const char* BrightRed     = "\x1b[91m";
+		static constexpr const char* BrightGreen   = "\x1b[92m";
+		static constexpr const char* BrightYellow  = "\x1b[93m";
+		static constexpr const char* BrightBlue    = "\x1b[94m";
+		static constexpr const char* BrightMagenta = "\x1b[95m";
+		static constexpr const char* BrightCyan    = "\x1b[96m";
+		static constexpr const char* BrightWhite   = "\x1b[97m";
+
+		static constexpr const char* BgBlack       = "\x1b[40m";
+		static constexpr const char* BgRed         = "\x1b[41m";
+		static constexpr const char* BgGreen       = "\x1b[42m";
+		static constexpr const char* BgYellow      = "\x1b[43m";
+		static constexpr const char* BgBlue        = "\x1b[44m";
+		static constexpr const char* BgMagenta     = "\x1b[45m";
+		static constexpr const char* BgCyan        = "\x1b[46m";
+		static constexpr const char* BgWhite       = "\x1b[47m";
 	};
 
 	static void ClearScreen()
