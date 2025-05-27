@@ -12,6 +12,7 @@ Mail : maximilian.mccarthy@mds.ac.nz
 
 #include <iostream>
 #include <windows.h>
+#include "vector2.hpp"
 
 #pragma once
 
@@ -20,24 +21,13 @@ class ConsoleUtils
 public:
 
 	// Constants
-	enum Color
+	struct Color
 	{
-		COLOUR_WHITE_ON_BLACK = 0, // White on Black.
-		COLOUR_RED_ON_BLACK = 1, // Red on Black.
-		COLOUR_GREEN_ON_BLACK = 2, // Green on Black.
-		COLOUR_YELLOW_ON_BLACK = 3, // Yellow on Black.
-		COLOUR_BLUE_ON_BLACK = 4, // Blue on Black.
-		COLOUR_MAGENTA_ON_BLACK = 5, // Magenta on Black.
-		COLOUR_CYAN_ON_BLACK = 6, // Cyan on Black.
-		COLOUR_BLACK_ON_GRAY = 7, // Black on Gray.
-		COLOUR_BLACK_ON_WHITE = 8, // Black on White.
-		COLOUR_RED_ON_WHITE = 9, // Red on White.
-		COLOUR_GREEN_ON_WHITE = 10, // Green on White.
-		COLOUR_YELLOW_ON_WHITE = 11, // Yellow on White.
-		COLOUR_BLUE_ON_WHITE = 12, // Blue on White.
-		COLOUR_MAGENTA_ON_WHITE = 13,// Magenta on White.
-		COLOUR_CYAN_ON_WHITE = 14, // Cyan on White.
-		COLOUR_WHITE_ON_WHITE = 15 // White on White.
+		static constexpr const char* Reset = "\x1b[0m";
+		static constexpr const char* White = "\x1b[37m";
+		static constexpr const char* Red = "\x1b[31m";
+		static constexpr const char* BrightBlack = "\x1b[90m";
+		static constexpr const char* BlackBackground = "\x1b[40m";
 	};
 
 	static void ClearScreen()
@@ -65,87 +55,9 @@ public:
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
 	}
 
-	static void SetRgb(Color color)
+	static void GotoXY(Vector2 position)
 	{
-		switch (color) 
-		{ 
-			case COLOUR_WHITE_ON_BLACK:    // White on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_RED_ON_BLACK:    // Red on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED); 
-				break; 
-
-			case COLOUR_GREEN_ON_BLACK:    // Green on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
-				break;
-
-			case COLOUR_YELLOW_ON_BLACK:    // Yellow on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN); 
-				break; 
-
-			case COLOUR_BLUE_ON_BLACK:    // Blue on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_MAGENTA_ON_BLACK:    // Magenta on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_CYAN_ON_BLACK:    // Cyan on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_BLACK_ON_GRAY:    // Black on Gray. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_INTENSITY); 
-				break; 
-
-			case COLOUR_BLACK_ON_WHITE:    // Black on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE); 
-				break; 
-
-			case COLOUR_RED_ON_WHITE:    // Red on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED); 
-				break; 
-
-			case COLOUR_GREEN_ON_WHITE:    // Green on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_GREEN); 
-				break; 
-
-			case COLOUR_YELLOW_ON_WHITE:    // Yellow on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
-				break;
-
-			case COLOUR_BLUE_ON_WHITE:    // Blue on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_MAGENTA_ON_WHITE:    // Magenta on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_CYAN_ON_WHITE:    // Cyan on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_BLUE); 
-				break; 
-
-			case COLOUR_WHITE_ON_WHITE:    // White on White. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | FOREGROUND_INTENSITY | BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); 
-				break; 
-
-			default:    // White on Black. 
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); 
-				break; 
-		}
-	}
-
-	static void fontSize(int a, int b) { 
-		PCONSOLE_FONT_INFOEX lpConsoleCurrentFontEx = new CONSOLE_FONT_INFOEX(); 
-		lpConsoleCurrentFontEx->cbSize = sizeof(CONSOLE_FONT_INFOEX); 
-		GetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), 0, lpConsoleCurrentFontEx); 
-		lpConsoleCurrentFontEx->dwFontSize.X = a; 
-		lpConsoleCurrentFontEx->dwFontSize.Y = b; 
-		SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), 0, lpConsoleCurrentFontEx); 
+		GotoXY(position.X, position.Y);
 	}
 
 	static int getConsoleWidth()

@@ -1,13 +1,20 @@
 #include <iostream>
 #include "consoleUtils.hpp"
 #include "board.hpp"
+#include <windows.h>
 
 int main()
 {
 	{
 		// Chuck us on UTF8 so we can use boxdrawing characters
-		// otherwise we'll just pring ascii (kinda limiting)
+		// otherwise we'll just using ascii (kinda limiting)
 		SetConsoleOutputCP(CP_UTF8);
+
+		// Enable ansii codes for colors
+		HANDLE output = GetStdHandle(STD_ERROR_HANDLE);
+		DWORD mode = 0;
+		GetConsoleMode(output, &mode);
+		SetConsoleMode(output, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 	
 		// Clear anything (for if we're launching via cli)
 		ConsoleUtils::ClearScreen();
@@ -17,8 +24,11 @@ int main()
 	Board* playerBoard = new Board();
 	Board* opponentBoard = new Board();
 
-	playerBoard->DrawGrid((Vector2){0, 0});
+	Vector2 playerBoardPosition = {40, 5};
+	playerBoard->DrawGrid(playerBoardPosition);
+
 	
+
 	// Get rid of the boards when we're done
 	delete playerBoard;
 	delete opponentBoard;
