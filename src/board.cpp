@@ -98,18 +98,19 @@ std::string Board::generateBoardRow(std::string leftSide, std::string middle, in
 	return row;
 }
 
-// void Board::DrawToGrid(Vector2 boardPosition, Vector2 cellCoordinate, std::string content, const char* color)
-// {
-// 	// Set the color to draw with
-// 	std::cout << color;
+void Board::DrawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 cellCoordinate, std::string content, const char* color)
+{
+	// Set the color to draw with
+	std::cout << color;
 	
-// 	// Turn both relative coordinates to screen coordinates
-// 	boardPosition += Vector2(1) + (cellCoordinate * Vector2(5, 2));
-// 	ConsoleUtils::GotoXY(boardPosition);
+	// Turn both relative coordinates to screen coordinates
+	// TODO: Don't do the != "" thing (really dodgy)
+	boardPosition += Vector2(1) + (cellCoordinate * Vector2((settings.SeparatorContent != "") + settings.CellWidth, 1 + settings.UseSeparator));
+	ConsoleUtils::GotoXY(boardPosition);
 
-// 	// Draw the grid
-// 	std::cout << content;
+	// Draw the grid
+	std::cout << content;
 
-// 	// Reset the color
-// 	std::cout << ConsoleUtils::Color::Reset;
-// }
+	// Reset the color
+	std::cout << ConsoleUtils::Color::Reset;
+}

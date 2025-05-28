@@ -70,13 +70,12 @@ int main()
 	Board* playerBoard = new Board();
 	Board* opponentBoard = new Board();
 
+
+
+	playerBoard->DrawGrid({0, 0}, largeBoard, "OPPONENTS FLEET");
+	playerBoard->DrawGrid({52, 0}, smallBoard, "YOUR FLEET");
 	
 
-	playerBoard->DrawGrid({0, 0}, largeBoard, "opponent");
-	playerBoard->DrawGrid({52, 0}, smallBoard, "you");
-	
-
-	//Vector2 playerBoardPosition = {40, 5};
 	//playerBoard->DrawGrid(playerBoardPosition);
 	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 0}, " ╔╗ ", ConsoleUtils::Color::BrightBlack);
 	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 1}, " ║║ ", ConsoleUtils::Color::BrightBlack);
@@ -86,10 +85,15 @@ int main()
 
 	// Hit, miss, target
 	// TODO: Colorblind mode that makes the red magenta
-	//playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Red);
-	//playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Magenta);
-	//playerBoard->DrawToGrid(playerBoardPosition, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
-	//playerBoard->DrawToGrid(playerBoardPosition, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
+	// playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Red);
+	playerBoard->DrawToGrid({0, 0}, largeBoard, {6, 3}, " >< ", ConsoleUtils::Color::Magenta);
+	playerBoard->DrawToGrid({0, 0}, largeBoard, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
+	playerBoard->DrawToGrid({0, 0}, largeBoard, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
+
+	playerBoard->DrawToGrid({52, 0}, smallBoard, {0, 0}, "><", ConsoleUtils::Color::Magenta);
+	playerBoard->DrawToGrid({52, 0}, smallBoard, {9, 9}, "><", ConsoleUtils::Color::Magenta);
+	playerBoard->DrawToGrid({52, 0}, smallBoard, {4, 7}, "()", ConsoleUtils::Color::Cyan);
+	playerBoard->DrawToGrid({52, 0}, smallBoard, {2, 5}, "┤├", ConsoleUtils::Color::Green);
 
 	// Get rid of the boards when we're done
 	delete playerBoard;
