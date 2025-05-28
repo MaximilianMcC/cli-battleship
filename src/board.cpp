@@ -114,3 +114,15 @@ void Board::DrawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 c
 	// Reset the color
 	std::cout << ConsoleUtils::Color::Reset;
 }
+
+
+
+Vector2 Board::MeasureGrid(RenderSettings settings)
+{
+	// TODO: Add a cell height thing
+	// Add the width of the cells, and also include the separators if they were used
+	int totalWidth = ((width * settings.CellWidth) + (width * settings.UseSeparator)) + !settings.UseSeparator;
+	int totalHeight = ((height * 1) + (height * settings.UseSeparator)) + !settings.UseSeparator;
+
+	return Vector2(totalWidth, totalHeight);
+}

@@ -60,4 +60,5 @@ public:
 	// TF: Default Parameter
 	void DrawGrid(Vector2 position, RenderSettings settings, std::string title = "");
 	void DrawToGrid(Vector2 boardPosition, RenderSettings boardRenderSettings, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
+	Vector2 MeasureGrid(RenderSettings settings);
 };
