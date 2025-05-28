@@ -26,4 +26,7 @@ public:
 	Vector2 operator*(short scalar) const { return Vector2(X * scalar, Y * scalar); }
 
 	bool operator==(const Vector2& other) const { return ((X == other.X) && (Y == other.Y)); }
+
+	Vector2 JustX() const { return Vector2(X, 0); }
+	Vector2 JustY() const { return Vector2(0, Y); }
 };
