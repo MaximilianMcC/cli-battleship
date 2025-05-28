@@ -23,7 +23,7 @@ void Board::attackSpot(Vector2 cell)
 
 // TODO: Return the size of the board (just return position (we are updating it))
 // TODO: Make so you can change the width (4 rn)
-void Board::DrawGrid(Vector2 position, RenderSettings settings, std::string title)
+void Board::drawGrid(Vector2 position, RenderSettings settings, std::string title)
 {
 	// Draw the top section
 	ConsoleUtils::GotoXY(position.X, position.Y++);
@@ -95,7 +95,7 @@ std::string Board::generateBoardRow(std::string leftSide, std::string middle, in
 	return row;
 }
 
-void Board::DrawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 cellCoordinate, std::string content, const char* color)
+void Board::drawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 cellCoordinate, std::string content, const char* color)
 {
 	// Set the color to draw with
 	std::cout << color;
@@ -114,7 +114,7 @@ void Board::DrawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 c
 
 
 
-Vector2 Board::MeasureGrid(RenderSettings settings)
+Vector2 Board::measureGrid(RenderSettings settings)
 {
 	// TODO: Add a cell height thing
 	// Add the width of the cells, and also include the separators if they were used
@@ -125,7 +125,7 @@ Vector2 Board::MeasureGrid(RenderSettings settings)
 }
 
 // TODO: see if u can find a vscode extrnsion 2 audio update h files
-void Board::DrawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const char* color, Vector2 position, RenderSettings settings)
+void Board::drawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const char* color, Vector2 position, RenderSettings settings)
 {
 	// Check for if we need to add padding
 	// TODO: Add more than just 1 space depending on cell size
@@ -135,16 +135,16 @@ void Board::DrawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const ch
 	for (int i = 0; i < cells.size(); i++)
 	{
 		// Draw the glyph at the cells position
-		DrawToGrid(position, settings, cells[i], glyph, color);
+		drawToGrid(position, settings, cells[i], glyph, color);
 	}
 }
 
-void Board::Draw(Vector2 position, RenderSettings settings)
+void Board::draw(Vector2 position, RenderSettings settings)
 {
 	// Draw the grid
-	DrawGrid(position, settings);
+	drawGrid(position, settings);
 
 	// Draw everything on the grid
-	DrawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);
-	DrawGlyphsAt(hits, "><", ConsoleUtils::Color::BrightRed, position, settings);
+	drawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);
+	drawGlyphsAt(hits, "><", ConsoleUtils::Color::BrightRed, position, settings);
 }

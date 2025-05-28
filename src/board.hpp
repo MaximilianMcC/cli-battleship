@@ -5,6 +5,31 @@
 
 #pragma once
 
+struct RenderSettings
+{
+	int CellWidth;
+	// int CellHeight;
+
+	std::string TopLeft;
+	std::string TopRight;
+	std::string BottomLeft;
+	std::string BottomRight;
+
+	std::string TopSeparator;
+	std::string BottomSeparator;
+	std::string TopBottom;
+
+	std::string Side;
+	std::string Content;
+	std::string Separator;
+
+	bool UseSeparator;
+	std::string SeparatorSideLeft;
+	std::string SeparatorSideRight;
+	std::string SeparatorContent;
+	std::string SeparatorJoiner;
+};
+
 class Board
 {
 private:
@@ -20,48 +45,23 @@ private:
 
 	bool BoatAtPosition(Vector2 cell);
 
+	// Drawing stuff
+	// TF: Default Parameter
 	std::string generateBoardRow(std::string leftSide, std::string middle, int middleWidth, std::string separator, std::string rightSide, int rows);
+	void drawGrid(Vector2 position, RenderSettings settings, std::string title = "");
+	void drawToGrid(Vector2 boardPosition, RenderSettings boardRenderSettings, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
+	void drawGlyphsAt(std::vector<Vector2> cells, std::string glyphs, const char* color,  Vector2 position, RenderSettings settings);
 
 public:
 	// Board() {}
 	// ~Board() {}
-
-	struct RenderSettings
-	{
-		int CellWidth;
-		// int CellHeight;
-
-		std::string TopLeft;
-		std::string TopRight;
-		std::string BottomLeft;
-		std::string BottomRight;
-
-		std::string TopSeparator;
-		std::string BottomSeparator;
-		std::string TopBottom;
-
-		std::string Side;
-		std::string Content;
-		std::string Separator;
-
-		bool UseSeparator;
-		std::string SeparatorSideLeft;
-		std::string SeparatorSideRight;
-		std::string SeparatorContent;
-		std::string SeparatorJoiner;
-	};
-
-
 	bool addBoat(Boat& boat);
+
+
 
 	void attackSpot(Vector2 cell);
 
-	// Draw the board nicely
-	// TF: Default Parameter
-	void Draw(Vector2 position, RenderSettings settings);
-	void DrawGrid(Vector2 position, RenderSettings settings, std::string title = "");
-	void DrawToGrid(Vector2 boardPosition, RenderSettings boardRenderSettings, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
-	Vector2 MeasureGrid(RenderSettings settings);
-
-	void DrawGlyphsAt(std::vector<Vector2> cells, std::string glyphs, const char* color,  Vector2 position, RenderSettings settings);
+	// Draw the board
+	void draw(Vector2 position, RenderSettings settings);
+	Vector2 measureGrid(RenderSettings settings);
 };

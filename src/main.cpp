@@ -23,7 +23,7 @@ int main()
 	}
 
 	// The large display settings shows your view of the opponents board
-	Board::RenderSettings largeBoard;
+	RenderSettings largeBoard;
 	{
 		largeBoard.CellWidth = 4;
 
@@ -48,7 +48,7 @@ int main()
 	};
 
 	// The small display settings shows your own board
-	Board::RenderSettings smallBoard;
+	RenderSettings smallBoard;
 	{
 		smallBoard.CellWidth = 2;
 
@@ -76,14 +76,14 @@ int main()
 	playerBoard->attackSpot({7, 8});
 
 	// Centre the player grid (debug
-	Vector2 gridSize = playerBoard->MeasureGrid(largeBoard);
+	Vector2 gridSize = playerBoard->measureGrid(largeBoard);
 	Vector2 position = Vector2(
 		(ConsoleUtils::getConsoleWidth() - gridSize.X) / 2,
 		(ConsoleUtils::getConsoleHeight() - gridSize.Y) / 2
 	);
 
 	// Draw the grid in the centre
-	playerBoard->Draw(position, largeBoard);
+	playerBoard->draw(position, largeBoard);
 
 
 	// Hit, miss, target
