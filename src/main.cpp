@@ -72,22 +72,17 @@ int main()
 
 
 
-	playerBoard->DrawGrid({0, 0}, largeBoard, "OPPONENTS FLEET");
+	// Centre the player grid (debug
+	Vector2 gridSize = playerBoard->MeasureGrid(largeBoard);
+	Vector2 position = Vector2(
+		(ConsoleUtils::getConsoleWidth() - gridSize.X) / 2,
+		(ConsoleUtils::getConsoleHeight() - gridSize.Y) / 2
+	);
 
-	ConsoleUtils::GotoXY(playerBoard->MeasureGrid(largeBoard));
-	std::cout << "@";
+	// Draw the grid in the centre
+	playerBoard->DrawGrid(position, largeBoard, "OPPONENTS FLEET");
 
 
-	playerBoard->DrawGrid({52, 0}, smallBoard, "YOUR FLEET");
-	ConsoleUtils::GotoXY((Vector2){52, 0} + playerBoard->MeasureGrid(smallBoard));
-	std::cout << "@";
-
-	//playerBoard->DrawGrid(playerBoardPosition);
-	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 0}, " ╔╗ ", ConsoleUtils::Color::BrightBlack);
-	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 1}, " ║║ ", ConsoleUtils::Color::BrightBlack);
-	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 2}, " ║╢ ", ConsoleUtils::Color::BrightBlack);
-	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 3}, " ║@ ", ConsoleUtils::Color::BrightBlack);
-	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 4}, " ╚╝ ", ConsoleUtils::Color::BrightBlack);
 
 	// Hit, miss, target
 	// TODO: Colorblind mode that makes the red magenta
