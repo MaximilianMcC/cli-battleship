@@ -95,9 +95,9 @@ public:
 	{
 		CONSOLE_SCREEN_BUFFER_INFO console;
 		HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-		
+
 		GetConsoleScreenBufferInfo(consoleHandle, &console);
-		return console.dwSize.Y;
+		return (console.srWindow.Bottom - console.srWindow.Top) + 1;
 	}
 
 	static int getCursorX()
