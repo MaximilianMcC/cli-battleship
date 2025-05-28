@@ -19,55 +19,77 @@ int main()
 		// Clear anything (for if we're launching via cli)
 		ConsoleUtils::ClearScreen();
 		ConsoleUtils::hideCursor();
+		ConsoleUtils::GotoXY(0, 0);
 	}
 
-	std::cout << "	Carrier (5)" << std::endl;
-	std::cout << " ╔╗" << std::endl;
-	std::cout << " ║║" << std::endl;
-	std::cout << " ║╢" << std::endl;
-	std::cout << " ║@" << std::endl;
-	std::cout << " ╚╝" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "Battleship (4)" << std::endl;
-	std::cout << " /\\" << std::endl;
-	std::cout << " ││" << std::endl;
-	std::cout << " ╫╫" << std::endl;
-	std::cout << " ╰╯	" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "Cruiser (3)" << std::endl;
-	std::cout << " ╭╮" << std::endl;
-	std::cout << " ├┤" << std::endl;
-	std::cout << " └┘" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "Submarine (3)" << std::endl;
-	std::cout << " ╭╮" << std::endl;
-	std::cout << " ├│" << std::endl;
-	std::cout << " └┘" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "Destroyer (2)" << std::endl;
-	std::cout << " /\\" << std::endl;
-	std::cout << " ╚╝" << std::endl;
+	// The large display settings shows your view of the opponents board
+	Board::RenderSettings largeBoard;
+	{
+		largeBoard.CellWidth = 4;
+
+		largeBoard.TopLeft = "╔";
+		largeBoard.TopRight = "╗";
+		largeBoard.BottomLeft = "╚";
+		largeBoard.BottomRight = "╝";
+
+		largeBoard.TopSeparator = "╤";
+		largeBoard.BottomSeparator = "╧";
+		largeBoard.TopBottom = "═";
+
+		largeBoard.Side = "║";
+		largeBoard.Content = " ";
+		largeBoard.Separator = "│";
+
+		largeBoard.UseSeparator = true;
+		largeBoard.SeparatorSideLeft = "╟";
+		largeBoard.SeparatorSideRight = "╢";
+		largeBoard.SeparatorContent = "─";
+		largeBoard.SeparatorJoiner = "┼";
+	};
+
+	// The small display settings shows your own board
+	Board::RenderSettings smallBoard;
+	{
+		smallBoard.CellWidth = 2;
+
+		smallBoard.TopLeft = "╔";
+		smallBoard.TopRight = "╗";
+		smallBoard.BottomLeft = "╚";
+		smallBoard.BottomRight = "╝";
+
+		smallBoard.TopBottom = "═";
+
+		smallBoard.Side = "║";
+		smallBoard.Content = " ";
+		smallBoard.Separator = "";
+
+		smallBoard.UseSeparator = false;
+	};
 
 	// Make a board for the player and for the AI
 	Board* playerBoard = new Board();
 	Board* opponentBoard = new Board();
 
-	Vector2 playerBoardPosition = {40, 5};
-	playerBoard->DrawGrid(playerBoardPosition);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 0}, " ╔╗ ", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 1}, " ║║ ", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 2}, " ║╢ ", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 3}, " ║@ ", ConsoleUtils::Color::BrightBlack);
-	playerBoard->DrawToGrid(playerBoardPosition, {0, 4}, " ╚╝ ", ConsoleUtils::Color::BrightBlack);
+	
+
+	playerBoard->DrawGrid({0, 0}, largeBoard, "opponent");
+	playerBoard->DrawGrid({52, 0}, smallBoard, "you");
+	
+
+	//Vector2 playerBoardPosition = {40, 5};
+	//playerBoard->DrawGrid(playerBoardPosition);
+	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 0}, " ╔╗ ", ConsoleUtils::Color::BrightBlack);
+	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 1}, " ║║ ", ConsoleUtils::Color::BrightBlack);
+	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 2}, " ║╢ ", ConsoleUtils::Color::BrightBlack);
+	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 3}, " ║@ ", ConsoleUtils::Color::BrightBlack);
+	//playerBoard->DrawToGrid(playerBoardPosition,  {0, 4}, " ╚╝ ", ConsoleUtils::Color::BrightBlack);
 
 	// Hit, miss, target
 	// TODO: Colorblind mode that makes the red magenta
-	playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Red);
-	playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Magenta);
-	playerBoard->DrawToGrid(playerBoardPosition, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
-	playerBoard->DrawToGrid(playerBoardPosition, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
-
-
+	//playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Red);
+	//playerBoard->DrawToGrid(playerBoardPosition, {6, 3}, " >< ", ConsoleUtils::Color::Magenta);
+	//playerBoard->DrawToGrid(playerBoardPosition, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
+	//playerBoard->DrawToGrid(playerBoardPosition, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
 
 	// Get rid of the boards when we're done
 	delete playerBoard;
