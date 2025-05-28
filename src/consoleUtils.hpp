@@ -100,6 +100,14 @@ public:
 		return (console.srWindow.Bottom - console.srWindow.Top) + 1;
 	}
 
+	static Vector2 getConsoleSize()
+	{
+		return Vector2(
+			getConsoleWidth(),
+			getConsoleHeight()
+		);
+	}
+
 	static int getCursorX()
 	{
 		CONSOLE_SCREEN_BUFFER_INFO console;
