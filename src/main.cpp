@@ -70,7 +70,10 @@ int main()
 	Board* playerBoard = new Board();
 	Board* opponentBoard = new Board();
 
-
+	playerBoard->attackSpot({0, 0});
+	playerBoard->attackSpot({2, 7});
+	playerBoard->attackSpot({4, 3});
+	playerBoard->attackSpot({7, 8});
 
 	// Centre the player grid (debug
 	Vector2 gridSize = playerBoard->MeasureGrid(largeBoard);
@@ -80,8 +83,7 @@ int main()
 	);
 
 	// Draw the grid in the centre
-	playerBoard->DrawGrid(position, largeBoard, "OPPONENTS FLEET");
-
+	playerBoard->Draw(position, largeBoard);
 
 
 	// Hit, miss, target
@@ -91,10 +93,10 @@ int main()
 	// playerBoard->DrawToGrid({0, 0}, largeBoard, {4, 7}, " () ", ConsoleUtils::Color::Cyan);
 	// playerBoard->DrawToGrid({0, 0}, largeBoard, {2, 5}, " ┤├ ", ConsoleUtils::Color::Green);
 
-	// playerBoard->DrawToGrid({52, 0}, smallBoard, {0, 0}, "><", ConsoleUtils::Color::Magenta);
-	// playerBoard->DrawToGrid({52, 0}, smallBoard, {9, 9}, "><", ConsoleUtils::Color::Magenta);
-	// playerBoard->DrawToGrid({52, 0}, smallBoard, {4, 7}, "()", ConsoleUtils::Color::Cyan);
-	// playerBoard->DrawToGrid({52, 0}, smallBoard, {2, 5}, "┤├", ConsoleUtils::Color::Green);
+	// playerBoard->DrawToGrid(position, largeBoard, {0, 0}, " ><", ConsoleUtils::Color::Magenta);
+	// playerBoard->DrawToGrid(position, largeBoard, {9, 9}, " ><", ConsoleUtils::Color::Magenta);
+	// playerBoard->DrawToGrid(position, largeBoard, {4, 7}, " ()", ConsoleUtils::Color::Cyan);
+	// playerBoard->DrawToGrid(position, largeBoard, {2, 5}, " ┤├", ConsoleUtils::Color::Green);
 
 	// Get rid of the boards when we're done
 	delete playerBoard;

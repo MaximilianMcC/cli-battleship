@@ -15,9 +15,10 @@ private:
 
 	// The actual board
 	std::vector<Vector2> misses = {};
-	std::vector<Boat*> boats = {};
+	std::vector<Vector2> hits = {};
+	// std::vector<Boat*> boats = {};
 
-	Boat* BoatAtPosition(Vector2 position);
+	bool BoatAtPosition(Vector2 cell);
 
 	std::string generateBoardRow(std::string leftSide, std::string middle, int middleWidth, std::string separator, std::string rightSide, int rows);
 
@@ -50,15 +51,17 @@ public:
 		std::string SeparatorJoiner;
 	};
 
-	// Returns true/false depending on if theres a valid position
+
 	bool addBoat(Boat& boat);
 
-	// Returns true/false depending on hit or miss
-	bool attackSpot(Vector2 position);
+	void attackSpot(Vector2 cell);
 
 	// Draw the board nicely
 	// TF: Default Parameter
+	void Draw(Vector2 position, RenderSettings settings);
 	void DrawGrid(Vector2 position, RenderSettings settings, std::string title = "");
 	void DrawToGrid(Vector2 boardPosition, RenderSettings boardRenderSettings, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
 	Vector2 MeasureGrid(RenderSettings settings);
+
+	void DrawGlyphsAt(std::vector<Vector2> cells, std::string glyphs, const char* color,  Vector2 position, RenderSettings settings);
 };

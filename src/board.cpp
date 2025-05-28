@@ -2,26 +2,23 @@
 #include "consoleUtils.hpp"
 #include <string>
 
-Boat* Board::BoatAtPosition(Vector2 position)
+bool Board::BoatAtPosition(Vector2 position)
 {
-	// Loop through all boats on
-	// the board and check for if
-	// one is at the position
-	for (short i = 0; i < maxBoats; i++)
-	{
-		// Check for a hit
-		if (boats[i]->atPosition(position)) return boats[i];
-	}
+	
 
 	// There was no collision (miss)
-	return nullptr;
+	return false;
 }
 
-bool Board::attackSpot(Vector2 position)
+void Board::attackSpot(Vector2 cell)
 {
 	// Check for if we hit a boat
-	Boat* hitBoat = BoatAtPosition(position);
-	if (hitBoat == nullptr) return false;
+	bool hitBoat = BoatAtPosition(cell);
+	if (hitBoat == false)
+	{
+		// We did not hit a boat. Add a miss to the board
+		misses.push_back(cell);
+	}
 }
 
 // TODO: Return the size of the board (just return position (we are updating it))
@@ -125,4 +122,29 @@ Vector2 Board::MeasureGrid(RenderSettings settings)
 	int totalHeight = ((height * 1) + (height * settings.UseSeparator)) + !settings.UseSeparator;
 
 	return Vector2(totalWidth, totalHeight);
+}
+
+// TODO: see if u can find a vscode extrnsion 2 audio update h files
+void Board::DrawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const char* color, Vector2 position, RenderSettings settings)
+{
+	// Check for if we need to add padding
+	// TODO: Add more than just 1 space depending on cell size
+	if (settings.CellWidth > 2) glyph = (" " + glyph);
+
+	// Loop over every cell
+	for (int i = 0; i < cells.size(); i++)
+	{
+		// Draw the glyph at the cells position
+		DrawToGrid(position, settings, cells[i], glyph, color);
+	}
+}
+
+void Board::Draw(Vector2 position, RenderSettings settings)
+{
+	// Draw the grid
+	DrawGrid(position, settings);
+
+	// Draw everything on the grid
+	DrawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);
+	DrawGlyphsAt(hits, "><", ConsoleUtils::Color::BrightRed, position, settings);
 }
