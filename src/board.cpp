@@ -139,10 +139,10 @@ void Board::drawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const ch
 	}
 }
 
-void Board::draw(Vector2 position, RenderSettings settings)
+void Board::draw(Vector2 position, RenderSettings settings, std::string gridText)
 {
 	// Draw the grid
-	drawGrid(position, settings);
+	drawGrid(position, settings, gridText);
 
 	// Draw everything on the grid
 	drawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);

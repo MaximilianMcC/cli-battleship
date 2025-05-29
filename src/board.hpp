@@ -46,7 +46,6 @@ private:
 	bool BoatAtPosition(Vector2 cell);
 
 	// Drawing stuff
-	// TF: Default Parameter
 	std::string generateBoardRow(std::string leftSide, std::string middle, int middleWidth, std::string separator, std::string rightSide, int rows);
 	void drawGrid(Vector2 position, RenderSettings settings, std::string title = "");
 	void drawToGrid(Vector2 boardPosition, RenderSettings boardRenderSettings, Vector2 cellCoordinate, std::string content, const char* color = ConsoleUtils::Color::White);
@@ -62,6 +61,7 @@ public:
 	void attackSpot(Vector2 cell);
 
 	// Draw the board
-	void draw(Vector2 position, RenderSettings settings);
+	// TF: Default Parameter
+	void draw(Vector2 position, RenderSettings settings, std::string gridText = "");
 	Vector2 measureGrid(RenderSettings settings);
 };

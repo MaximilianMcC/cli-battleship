@@ -66,14 +66,14 @@ int main()
 		smallBoard.UseSeparator = false;
 	};
 
+	// Draw a little title thingy
+	std::cout << "\n";
+	ConsoleUtils::centreText("BATTLESHIPS");
+
+
 	// Make a board for the player and for the AI
 	Board* playerBoard = new Board();
 	Board* opponentBoard = new Board();
-
-	playerBoard->attackSpot({0, 0});
-	playerBoard->attackSpot({2, 7});
-	playerBoard->attackSpot({4, 3});
-	playerBoard->attackSpot({7, 8});
 
 	// Make the layout to have the opponents grid (from the players perspective)
 	// to be large and on the left side, and to have the players board
@@ -83,7 +83,7 @@ int main()
 	Vector2 playerGridSize = playerBoard->measureGrid(smallBoard);
 	
 	// Get the max size of the two
-	//? padding should just be 1. Somewhere 1 is being added
+	//! padding SHOULD just be 1. Somewhere 1 is being added
 	const int padding = 2;
 	Vector2 maxSize = Vector2(
 		opponentGridSize.X + padding + playerGridSize.X,
@@ -96,11 +96,13 @@ int main()
 	// Get the positions of both boards
 	//? padding should just be 1. Somewhere 1 is being added
 	Vector2 opponentPosition = centeredOrigin;
-	Vector2 playerPosition = centeredOrigin + opponentGridSize.JustX() + Vector2(padding, 0);
+	Vector2 playerPosition = centeredOrigin + opponentGridSize.justX() + Vector2(padding, 0);
 
 	// Draw both the boards
-	opponentBoard->draw(opponentPosition, largeBoard);
-	playerBoard->draw(playerPosition, smallBoard);
+	// TODO: When you make a move then do a radar wipe animation thingy and reveal the points like that
+	opponentBoard->draw(opponentPosition, largeBoard, "OPPONENTS FLEET");
+	playerBoard->draw(playerPosition, smallBoard, "YOUR FLEET");
+
 
 
 	// Hit, miss, target
@@ -121,4 +123,6 @@ int main()
 
 	// Stop the console from closing
 	std::getchar();
+	ConsoleUtils::ClearScreen();
+	ConsoleUtils::showCursor();
 }

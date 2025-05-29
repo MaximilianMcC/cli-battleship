@@ -27,6 +27,6 @@ public:
 
 	bool operator==(const Vector2& other) const { return ((X == other.X) && (Y == other.Y)); }
 
-	Vector2 JustX() const { return Vector2(X, 0); }
-	Vector2 JustY() const { return Vector2(0, Y); }
+	Vector2 justX() const { return Vector2(X, 0); }
+	Vector2 justY() const { return Vector2(0, Y); }
 };
