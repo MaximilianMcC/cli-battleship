@@ -16,7 +16,7 @@
 | Pointers: Dereferenced      | `// TF: Pointer Dereferenced`    | ❌   |
 | References                  | `// TF: Reference`               | ❌   |
 | Dynamic Memory              | `// TF: Dynamic Memory`          | ❌   |
-| Classes                     | `// TF: Class`                   | ❌   |
+| Classes                     | `// TF: Class`                   | ✅   |
 | Objects                     | `// TF: Class Instance`          | ❌   |
 | Constructor                 | `// TF: Constructor`             | ❌   |
 | Destructor                  | `// TF: Destructor`              | ❌   |

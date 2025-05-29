@@ -30,6 +30,7 @@ struct RenderSettings
 	std::string SeparatorJoiner;
 };
 
+// TF: Class
 class Board
 {
 private:

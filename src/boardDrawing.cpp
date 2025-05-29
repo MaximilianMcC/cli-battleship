@@ -2,27 +2,18 @@
 #include "consoleUtils.hpp"
 #include <string>
 
-bool Board::BoatAtPosition(Vector2 position)
+void Board::draw(Vector2 position, RenderSettings settings, std::string gridText)
 {
-	
+	// Draw the grid
+	drawGrid(position, settings, gridText);
 
-	// There was no collision (miss)
-	return false;
+	// Draw everything on the grid
+	drawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);
+	drawGlyphsAt(hits, "><", ConsoleUtils::Color::BrightRed, position, settings);
 }
 
-void Board::attackSpot(Vector2 cell)
-{
-	// Check for if we hit a boat
-	bool hitBoat = BoatAtPosition(cell);
-	if (hitBoat == false)
-	{
-		// We did not hit a boat. Add a miss to the board
-		misses.push_back(cell);
-	}
-}
 
-// TODO: Return the size of the board (just return position (we are updating it))
-// TODO: Make so you can change the width (4 rn)
+
 void Board::drawGrid(Vector2 position, RenderSettings settings, std::string title)
 {
 	// Draw the top section
@@ -65,6 +56,54 @@ void Board::drawGrid(Vector2 position, RenderSettings settings, std::string titl
 }
 
 
+
+void Board::drawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 cellCoordinate, std::string content, const char* color)
+{
+	// Set the color to draw with
+	std::cout << color;
+	
+	// Turn both relative coordinates to screen coordinates
+	// TODO: Don't do the != "" thing (really dodgy)
+	boardPosition += Vector2(1) + (cellCoordinate * Vector2((settings.SeparatorContent != "") + settings.CellWidth, 1 + settings.UseSeparator));
+	ConsoleUtils::GotoXY(boardPosition);
+
+	// Draw the grid
+	std::cout << content;
+
+	// Reset the color
+	std::cout << ConsoleUtils::Color::Reset;
+}
+
+
+// TODO: see if u can find a vscode extrnsion 2 audio update h files
+void Board::drawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const char* color, Vector2 position, RenderSettings settings)
+{
+	// Check for if we need to add padding
+	// TODO: Add more than just 1 space depending on cell size
+	if (settings.CellWidth > 2) glyph = (" " + glyph);
+
+	// Loop over every cell
+	for (int i = 0; i < cells.size(); i++)
+	{
+		// Draw the glyph at the cells position
+		drawToGrid(position, settings, cells[i], glyph, color);
+	}
+}
+
+
+
+Vector2 Board::measureGrid(RenderSettings settings)
+{
+	// TODO: Add a cell height thing
+	// Add the width of the cells, and also include the separators if they were used
+	int totalWidth = ((width * settings.CellWidth) + (width * settings.UseSeparator)) + !settings.UseSeparator;
+	int totalHeight = ((height * 1) + (height * settings.UseSeparator)) + !settings.UseSeparator;
+
+	return Vector2(totalWidth, totalHeight);
+}
+
+
+
 std::string Board::generateBoardRow(std::string leftSide, std::string middle, int middleWidth, std::string separator, std::string rightSide, int rows)
 {
 	// TODO: Use char arrays because its quicker maybe
@@ -93,58 +132,4 @@ std::string Board::generateBoardRow(std::string leftSide, std::string middle, in
 	
 	// Return the generated row
 	return row;
-}
-
-void Board::drawToGrid(Vector2 boardPosition, RenderSettings settings, Vector2 cellCoordinate, std::string content, const char* color)
-{
-	// Set the color to draw with
-	std::cout << color;
-	
-	// Turn both relative coordinates to screen coordinates
-	// TODO: Don't do the != "" thing (really dodgy)
-	boardPosition += Vector2(1) + (cellCoordinate * Vector2((settings.SeparatorContent != "") + settings.CellWidth, 1 + settings.UseSeparator));
-	ConsoleUtils::GotoXY(boardPosition);
-
-	// Draw the grid
-	std::cout << content;
-
-	// Reset the color
-	std::cout << ConsoleUtils::Color::Reset;
-}
-
-
-
-Vector2 Board::measureGrid(RenderSettings settings)
-{
-	// TODO: Add a cell height thing
-	// Add the width of the cells, and also include the separators if they were used
-	int totalWidth = ((width * settings.CellWidth) + (width * settings.UseSeparator)) + !settings.UseSeparator;
-	int totalHeight = ((height * 1) + (height * settings.UseSeparator)) + !settings.UseSeparator;
-
-	return Vector2(totalWidth, totalHeight);
-}
-
-// TODO: see if u can find a vscode extrnsion 2 audio update h files
-void Board::drawGlyphsAt(std::vector<Vector2> cells, std::string glyph, const char* color, Vector2 position, RenderSettings settings)
-{
-	// Check for if we need to add padding
-	// TODO: Add more than just 1 space depending on cell size
-	if (settings.CellWidth > 2) glyph = (" " + glyph);
-
-	// Loop over every cell
-	for (int i = 0; i < cells.size(); i++)
-	{
-		// Draw the glyph at the cells position
-		drawToGrid(position, settings, cells[i], glyph, color);
-	}
-}
-
-void Board::draw(Vector2 position, RenderSettings settings, std::string gridText)
-{
-	// Draw the grid
-	drawGrid(position, settings, gridText);
-
-	// Draw everything on the grid
-	drawGlyphsAt(misses, "()", ConsoleUtils::Color::BrightBlue, position, settings);
-	drawGlyphsAt(hits, "><", ConsoleUtils::Color::BrightRed, position, settings);
 }
