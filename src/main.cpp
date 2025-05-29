@@ -75,15 +75,32 @@ int main()
 	playerBoard->attackSpot({4, 3});
 	playerBoard->attackSpot({7, 8});
 
-	// Centre the player grid (debug
-	Vector2 gridSize = playerBoard->measureGrid(largeBoard);
-	Vector2 position = Vector2(
-		(ConsoleUtils::getConsoleWidth() - gridSize.X) / 2,
-		(ConsoleUtils::getConsoleHeight() - gridSize.Y) / 2
+	// Make the layout to have the opponents grid (from the players perspective)
+	// to be large and on the left side, and to have the players board
+	// to be smaller and in the bottom right. Both are centered on both axis
+	// TODO: Add a fake radar visual that spins around in the top right
+	Vector2 opponentGridSize = opponentBoard->measureGrid(largeBoard);
+	Vector2 playerGridSize = playerBoard->measureGrid(smallBoard);
+	
+	// Get the max size of the two
+	//? padding should just be 1. Somewhere 1 is being added
+	const int padding = 2;
+	Vector2 maxSize = Vector2(
+		opponentGridSize.X + padding + playerGridSize.X,
+		opponentGridSize.Y
 	);
 
-	// Draw the grid in the centre
-	playerBoard->draw(position, largeBoard);
+	// Get the origin to draw them centered
+	Vector2 centeredOrigin = (ConsoleUtils::getConsoleSize() - maxSize) / 2;
+
+	// Get the positions of both boards
+	//? padding should just be 1. Somewhere 1 is being added
+	Vector2 opponentPosition = centeredOrigin;
+	Vector2 playerPosition = centeredOrigin + opponentGridSize.JustX() + Vector2(padding, 0);
+
+	// Draw both the boards
+	opponentBoard->draw(opponentPosition, largeBoard);
+	playerBoard->draw(playerPosition, smallBoard);
 
 
 	// Hit, miss, target
@@ -105,33 +122,3 @@ int main()
 	// Stop the console from closing
 	std::getchar();
 }
-
-
-/*
-Carrier (5)
- ╔╗
- ║║
- ║╢
- ║@
- ╚╝
-
-Battleship (4)
- /\
- ││
- ╫╫
- ╰╯	
-
-Cruiser (3)
- ╭╮
- ├┤
- └┘
-
-Submarine (3)
- ╭╮
- ├│
- └┘
-
-Destroyer (2)
- /\
- ╚╝
-*/
